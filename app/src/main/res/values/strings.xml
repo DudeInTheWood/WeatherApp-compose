@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="no_data">NO DATA</string>
+    <string name="feel_like">Feel Like</string>
+    <string name="search">Search</string>
+    <string name="enter_city">Enter city</string>
+    <string name="dissmiss">DISMISS</string>
+</resources>
