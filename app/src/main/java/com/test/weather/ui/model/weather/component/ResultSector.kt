@@ -26,6 +26,8 @@ import com.test.weather.R
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.test.weather.data.model.CurrentWeather
@@ -48,8 +50,7 @@ fun ResultSector(
 ) {
     Column(
         modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 8.dp),
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -57,7 +58,6 @@ fun ResultSector(
             Box {
                 LoadingIndicator(
                     modifier = Modifier
-                        .fillMaxWidth()
                         .height(350.dp)
                         .fillMaxWidth()
                         .padding(horizontal = 8.dp),
@@ -72,6 +72,9 @@ fun ResultSector(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
+                    modifier = Modifier.weight(1f, fill = false),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                     text = selectedGeo?.name.orEmpty(),
                     style = MaterialTheme.typography.titleLarge,
                     color = Color.DarkGray
@@ -87,18 +90,27 @@ fun ResultSector(
             Spacer(modifier = Modifier.height(12.dp))
 
             Text(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center,
                 text = "${weatherData.currentWeather?.temp?.roundToInt()}°",
                 style = MaterialTheme.typography.displayLarge,
                 color = Color.DarkGray
             )
 
             Text(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center,
                 text = "${stringResource(R.string.feel_like)} ${weatherData.currentWeather?.feelsLike?.roundToInt()}°",
                 style = MaterialTheme.typography.titleLarge,
                 color = Color.DarkGray
             )
 
             Text(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center,
                 text = getWeatherDescription(weatherData.currentWeather),
                 style = MaterialTheme.typography.titleMedium,
                 color = Color.DarkGray
@@ -147,7 +159,7 @@ fun HourlyWeatherList(
                         weather = WeatherHourlyModel(
                             temp = hourItem.temp?.roundToInt().toString(),
                             time = hourItem.dt?.toTime() ?: "",
-                            currentIcon = conditionToIcon(hourItem)
+                            imageUrl = conditionToIcon(hourItem)
                         ),
                         modifier = Modifier
                             .fillMaxWidth()
@@ -165,18 +177,8 @@ private fun getWeatherDescription(current: CurrentWeather?): String {
 }
 
 fun conditionToIcon(hourly: HourlyItem): String {
-    val weatherId = hourly.weather?.firstOrNull()?.id ?: return "unknown"
-
-    return when (weatherId) {
-        800 -> "clear"
-        in 801..804 -> "cloudy"
-        in 500..531 -> "rain"
-        in 300..321 -> "drizzle"
-        in 200..232 -> "thunderstorm"
-        in 600..622 -> "snow"
-        in 701..781 -> "atmosphere"
-        else -> "unknown"
-    }
+    val icon = hourly.weather?.firstOrNull()?.icon ?: return "unknown"
+    return "https://openweathermap.org/img/wn/$icon@2x.png"
 }
 
 @Preview(showBackground = true)

@@ -82,4 +82,7 @@ dependencies {
     implementation(libs.moshi.kotlin)
     implementation(libs.okhttp.logging)
     ksp(libs.moshi.kotlin.codegen)
+
+    //coil image
+    implementation(libs.coil.compose)
 }

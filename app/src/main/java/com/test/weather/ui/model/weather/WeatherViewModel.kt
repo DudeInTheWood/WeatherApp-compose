@@ -39,7 +39,13 @@ class WeatherViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     if (result.data.isNullOrEmpty()) {
-                        updateState { copy(isCityDataLoading = false, error = "No city Found") }
+                        updateState {
+                            copy(
+                                isCityDataLoading = false,
+                                cityList = null,
+                                error = "No city Found"
+                            )
+                        }
                     } else {
                         updateState {
                             copy(

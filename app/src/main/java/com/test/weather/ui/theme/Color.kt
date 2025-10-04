@@ -11,4 +11,4 @@ val BlueSecondaryDark = Color(0xFF1976D2)
 val DarkSoftBackground = Color(0xFF263238)
 
 val BluePaleSky = Color(0xFFD4E9FF)
-val BlueLightSky = Color(0xFFE5F0FF)
+val BlueLightSky = Color(0xFFB5DAFD)
