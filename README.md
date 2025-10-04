@@ -33,6 +33,6 @@ This project is based on the official Android [architecture templates](https://g
 ## Getting Started
 
 1. **Clone the repository:**
-2 Add your OpenWeather API key to local.properties:
+2. Add your OpenWeather API key to local.properties:
 OPENWEATHER_API_KEY=YOUR_API_KEY_HERE
 
