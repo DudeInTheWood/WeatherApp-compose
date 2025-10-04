@@ -104,7 +104,7 @@ class WeatherViewModel @Inject constructor(
 
 data class WeatherScreenState(
     val searchText: String = "",
-    val cityList: List<CityDataResponse?>? = emptyList(),
+    val cityList: List<CityDataResponse?>? = null,
     val selectedCity: CityDataResponse? = null,
     val weatherData: WeatherDataResponse? = null,
     val isCityDataLoading: Boolean = false,

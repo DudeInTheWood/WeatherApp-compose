@@ -118,12 +118,16 @@ fun ResultSector(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            HourlyWeatherList(
-                weatherData.hourly,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(BluePaleSky)
-            )
+            Box(modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp)) {
+                HourlyWeatherList(
+                    weatherData.hourly,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(BluePaleSky)
+                )
+            }
         } else {
             Box(
                 modifier = Modifier
