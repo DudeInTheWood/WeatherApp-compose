@@ -8,24 +8,21 @@ This project is based on the official Android [architecture templates](https://g
 
 ## Features
 
-- Fetches current weather and forecast using **OpenWeather API**
+- Fetches current weather and forecasts using OpenWeather API, displaying the current temperature and hourly data
 - Built entirely with **Jetpack Compose**
 - Follows **MVVM architecture** for maintainability
-- Modular and clean code structure
+- Uses **Dependency Injection (Hilt)** for clean and testable code
 
 ---
 
 ## Screenshots
 
-*(Optional: Add some screenshots of your app here to make the README visually appealing)*
 
 ---
 
 ## Prerequisites
 
 - Android Studio (latest stable version recommended)
-- Kotlin 1.9+  
-- Jetpack Compose 1.5+  
 - OpenWeather API key ([Get it here](https://openweathermap.org/))
 
 ---
@@ -34,5 +31,7 @@ This project is based on the official Android [architecture templates](https://g
 
 1. **Clone the repository:**
 2. Add your OpenWeather API key to local.properties:
+
+```properties
 OPENWEATHER_API_KEY=YOUR_API_KEY_HERE
 
