@@ -12,12 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.size.Scale
 import coil.size.Size
 import com.test.weather.R
+import com.test.weather.ui.theme.WeatherAppTheme
 
 
 data class WeatherHourlyModel(
@@ -43,7 +45,8 @@ fun HourlyWeatherCard(
         Box(
             modifier = Modifier
                 .padding(start = 10.dp, end = 10.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
@@ -69,10 +72,10 @@ fun HourlyWeatherCard(
 
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun HourlyWeatherCardPreview() {
-//    WeatherAppTheme {
-//        HourlyWeatherCard(WeatherHourlyModel())
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+fun HourlyWeatherCardPreview() {
+    WeatherAppTheme {
+        HourlyWeatherCard(WeatherHourlyModel())
+    }
+}
