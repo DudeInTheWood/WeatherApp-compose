@@ -31,11 +31,10 @@ fun WeatherScreen(modifier: Modifier = Modifier, viewModel: WeatherViewModel = h
     val windowInfo = currentWindowAdaptiveInfo().windowSizeClass
     val deviceConfiguration = DeviceConfiguration.fromWindowSizeClass(windowInfo)
     val isWideScreen = when (deviceConfiguration) {
-        DeviceConfiguration.MOBILE_PORTRAIT -> false
-        DeviceConfiguration.MOBILE_LANDSCAPE -> true
-        DeviceConfiguration.TABLET_PORTRAIT -> false
-        DeviceConfiguration.TABLET_LANDSCAPE -> true
+        DeviceConfiguration.MOBILE_LANDSCAPE,
+        DeviceConfiguration.TABLET_LANDSCAPE,
         DeviceConfiguration.DESKTOP -> true
+        else -> false
     }
 
     LaunchedEffect(uiState.error) {
