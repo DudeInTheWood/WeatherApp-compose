@@ -7,15 +7,20 @@ A simple and clean **Weather Application** built with **Jetpack Compose**, based
 ---
 
 ## Features
+- Supports phone and tablet responsive layouts (portrait stack / landscape split)
+- Fetches current weather and hourly forecasts using OpenWeather API
+- Displays user-friendly error messages for network or search issues
+- Smooth, modern Compose UI
 
-- Fetches current weather and forecasts using OpenWeather API, displaying the current temperature and hourly data
-- Built entirely with **Jetpack Compose**
-- Follows **MVVM architecture** for maintainability
-- Uses **Dependency Injection (Hilt)** for clean and testable code
+## Architecture & Tech Stack
+- MVVM architecture for maintainability
+- Dependency Injection with Hilt
+- Retrofit for network requests
+- Coil for image loading
 
 ---
 
-## Demo
+## Screenshot & Demo
 
 
 ![Weather App screen](https://github.com/DudeInTheWood/MyImage/blob/main/weather%20app%20screen.png)
@@ -36,6 +41,7 @@ A simple and clean **Weather Application** built with **Jetpack Compose**, based
 1. **Clone the repository**
 2. Add your OpenWeather API key to local.properties:
 
-```properties
-OPENWEATHER_API_KEY=YOUR_API_KEY_HERE
+`OPENWEATHER_API_KEY=YOUR_API_KEY_HERE`
+
+3. Build and run the app on a device or emulator
 
