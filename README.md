@@ -1,8 +1,8 @@
 # WeatherApp-compose 🌤️
 
-A simple and clean **Weather Application** built with **Jetpack Compose**, following modern Android architecture practices.
+A simple and clean **Weather Application** built with **Jetpack Compose**, based on the official Android [architecture templates](https://github.com/android/architecture-templates/tree/base?tab=readme-ov-file)
+ for guidance on building a clean and scalable app structure.
 
-This project is based on the official Android [architecture templates](https://github.com/android/architecture-templates/tree/base?tab=readme-ov-file) for guidance on clean and scalable app structure.
 
 ---
 
