@@ -18,7 +18,7 @@ This project is based on the official Android [architecture templates](https://g
 ## Demo
 
 
-![Weather App screen]([https://github.com/DudeInTheWood/MyImage/raw/main/weather-app-demo.gif](https://raw.githubusercontent.com/DudeInTheWood/MyImage/refs/heads/main/weather%20app%20screen.png))
+![Weather App screen](https://github.com/DudeInTheWood/MyImage/blob/main/weather%20app%20screen.png)
 
 ![Weather App Demo](https://github.com/DudeInTheWood/MyImage/raw/main/weather-app-demo.gif)
 
