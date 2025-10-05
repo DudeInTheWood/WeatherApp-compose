@@ -1,4 +1,4 @@
-package com.test.weather.util
+package com.test.weather.ui.util
 
 import androidx.window.core.layout.WindowHeightSizeClass
 import androidx.window.core.layout.WindowSizeClass

@@ -14,14 +14,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.test.weather.ui.model.base.BaseScreen
 import com.test.weather.ui.model.base.component.TwoSectorResponsiveLayout
 import com.test.weather.ui.model.weather.component.ResultSector
 import com.test.weather.ui.model.weather.component.SearchSector
-import com.test.weather.util.DeviceConfiguration
+import com.test.weather.ui.util.DeviceConfiguration
 
 @Composable
 fun WeatherScreen(modifier: Modifier = Modifier, viewModel: WeatherViewModel = hiltViewModel()) {

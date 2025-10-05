@@ -1,4 +1,4 @@
-package com.test.weather.util
+package com.test.weather.ui.util
 
 import java.time.Instant
 import java.time.ZoneId

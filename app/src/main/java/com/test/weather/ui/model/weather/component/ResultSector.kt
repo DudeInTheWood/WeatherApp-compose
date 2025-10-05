@@ -38,7 +38,7 @@ import com.test.weather.ui.model.base.component.LoadingIndicator
 import com.test.weather.ui.theme.BlueLightSky
 import com.test.weather.ui.theme.BluePaleSky
 import com.test.weather.ui.theme.WeatherAppTheme
-import com.test.weather.util.toTime
+import com.test.weather.ui.util.toTime
 import kotlin.math.roundToInt
 
 @Composable
