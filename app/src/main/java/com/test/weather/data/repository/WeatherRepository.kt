@@ -12,14 +12,13 @@ import com.test.weather.data.remote.api.WeatherApi
 import com.test.weather.domain.common.AppResult
 import com.test.weather.domain.model.City
 import com.test.weather.domain.model.Weather
-import com.test.weather.domain.repository.WeatherRepository
 import jakarta.inject.Inject
 
-class OpenWeatherRepository @Inject constructor(
+class WeatherRepository @Inject constructor(
     private val api: WeatherApi,
     private val networkHandler: NetworkHandler
-) : WeatherRepository {
-    override suspend fun searchCities(query: String, limit: Int): AppResult<List<City>> {
+) {
+    suspend fun searchCities(query: String, limit: Int): AppResult<List<City>> {
         return when (val result = networkHandler.handleNetworkCall {
             api.getCityData(
                 city = query,
@@ -35,7 +34,7 @@ class OpenWeatherRepository @Inject constructor(
         }
     }
 
-    override suspend fun getWeather(
+    suspend fun getWeather(
         lat: Double,
         lon: Double
     ): AppResult<Weather> {
