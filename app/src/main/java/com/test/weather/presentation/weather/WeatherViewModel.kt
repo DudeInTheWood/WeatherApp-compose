@@ -9,11 +9,15 @@ import com.test.weather.presentation.weather.mapper.toUiModel
 import com.test.weather.presentation.weather.model.CitySearchState
 import com.test.weather.presentation.weather.model.CityUiModel
 import com.test.weather.presentation.weather.model.WeatherContentState
+import com.test.weather.presentation.weather.model.WeatherEvent
 import com.test.weather.presentation.weather.model.WeatherScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -26,14 +30,13 @@ class WeatherViewModel @Inject constructor(
     private val _state = MutableStateFlow(WeatherScreenState())
     val state: StateFlow<WeatherScreenState> = _state.asStateFlow()
 
+    private val _events = MutableSharedFlow<WeatherEvent>()
+    val events: SharedFlow<WeatherEvent> = _events.asSharedFlow()
+
     private val searchLimit = 5
 
     fun onSearchTextChange(searchText: String) {
         updateState { copy(searchText = searchText) }
-    }
-
-    fun onSnackbarShown() {
-        updateState { copy(snackbarMessage = null) }
     }
 
     fun onSelectCity(city: CityUiModel) {
@@ -46,7 +49,7 @@ class WeatherViewModel @Inject constructor(
         if (query.isBlank()) return
 
         viewModelScope.launch {
-            updateState { copy(citySearchState = CitySearchState.Loading, snackbarMessage = null) }
+            updateState { copy(citySearchState = CitySearchState.Loading) }
             val result = searchCitiesUseCase(query, searchLimit)
             when (result) {
                 is AppResult.Success -> {
@@ -54,15 +57,13 @@ class WeatherViewModel @Inject constructor(
                     if (cityList.isEmpty()) {
                         updateState {
                             copy(
-                                citySearchState = CitySearchState.Empty,
-                                snackbarMessage = null
+                                citySearchState = CitySearchState.Empty
                             )
                         }
                     } else {
                         updateState {
                             copy(
-                                citySearchState = CitySearchState.Success(cityList),
-                                snackbarMessage = null
+                                citySearchState = CitySearchState.Success(cityList)
                             )
                         }
                     }
@@ -72,10 +73,10 @@ class WeatherViewModel @Inject constructor(
                     val message = result.message
                     updateState {
                         copy(
-                            citySearchState = CitySearchState.Error(message),
-                            snackbarMessage = message
+                            citySearchState = CitySearchState.Error(message)
                         )
                     }
+                    sendEvent(WeatherEvent.ShowSnackbar(message))
                 }
             }
         }
@@ -83,7 +84,7 @@ class WeatherViewModel @Inject constructor(
 
     private fun getWeatherData(city: CityUiModel) {
         viewModelScope.launch {
-            updateState { copy(weatherState = WeatherContentState.Loading, snackbarMessage = null) }
+            updateState { copy(weatherState = WeatherContentState.Loading) }
             val result = getWeatherUseCase(lat = city.lat, lon = city.lon)
 
             when (result) {
@@ -91,8 +92,7 @@ class WeatherViewModel @Inject constructor(
                     val weather = result.data.toUiModel(city)
                     updateState {
                         copy(
-                            weatherState = WeatherContentState.Success(weather),
-                            snackbarMessage = null
+                            weatherState = WeatherContentState.Success(weather)
                         )
                     }
                 }
@@ -101,10 +101,10 @@ class WeatherViewModel @Inject constructor(
                     val message = result.message
                     updateState {
                         copy(
-                            weatherState = WeatherContentState.Error(message),
-                            snackbarMessage = message
+                            weatherState = WeatherContentState.Error(message)
                         )
                     }
+                    sendEvent(WeatherEvent.ShowSnackbar(message))
                 }
             }
         }
@@ -112,5 +112,9 @@ class WeatherViewModel @Inject constructor(
 
     private fun updateState(update: WeatherScreenState.() -> WeatherScreenState) {
         _state.update { it.update() }
+    }
+
+    private suspend fun sendEvent(event: WeatherEvent) {
+        _events.emit(event)
     }
 }

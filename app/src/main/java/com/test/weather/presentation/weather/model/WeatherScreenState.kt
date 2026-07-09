@@ -4,8 +4,7 @@ data class WeatherScreenState(
     val searchText: String = "",
     val citySearchState: CitySearchState = CitySearchState.Idle,
     val selectedCity: CityUiModel? = null,
-    val weatherState: WeatherContentState = WeatherContentState.Empty,
-    val snackbarMessage: String? = null
+    val weatherState: WeatherContentState = WeatherContentState.Empty
 )
 
 sealed interface CitySearchState {

@@ -23,6 +23,7 @@ import com.test.weather.presentation.common.component.TwoSectorResponsiveLayout
 import com.test.weather.presentation.weather.component.ResultSector
 import com.test.weather.presentation.weather.component.SearchSector
 import com.test.weather.presentation.util.DeviceConfiguration
+import com.test.weather.presentation.weather.model.WeatherEvent
 
 @Composable
 fun WeatherScreen(modifier: Modifier = Modifier, viewModel: WeatherViewModel = hiltViewModel()) {
@@ -40,16 +41,16 @@ fun WeatherScreen(modifier: Modifier = Modifier, viewModel: WeatherViewModel = h
         else -> false
     }
 
-    LaunchedEffect(uiState.snackbarMessage) {
-        uiState.snackbarMessage?.let { message ->
-            try {
-                snackBarHostState.showSnackbar(
-                    message = message,
-                    actionLabel = dismissLabel,
-                    duration = SnackbarDuration.Short
-                )
-            } finally {
-                viewModel.onSnackbarShown()
+    LaunchedEffect(Unit) {
+        viewModel.events.collect { event ->
+            when (event) {
+                is WeatherEvent.ShowSnackbar -> {
+                    snackBarHostState.showSnackbar(
+                        message = event.message,
+                        actionLabel = dismissLabel,
+                        duration = SnackbarDuration.Short
+                    )
+                }
             }
         }
     }
